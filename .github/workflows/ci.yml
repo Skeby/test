@@ -1,0 +1,20 @@
+name: HTML Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  html-validation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install HTML Validator
+        run: npm install -g html-validator-cli
+
+      - name: Validate HTML
+        run: html-validator '**/*.html'
