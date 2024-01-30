@@ -17,4 +17,5 @@ jobs:
         run: npm install -g html-validator-cli
 
       - name: Validate HTML
-        run: html-validator '**/*.html'
+        run: |
+          find . -name "*.html" -type f -exec html-validator {} \;
