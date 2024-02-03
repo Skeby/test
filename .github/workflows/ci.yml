@@ -1,20 +1,25 @@
-name: HTML Validation
+name: Run tests
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: ["main"]
+
+  workflow_dispatch:
 
 jobs:
-  html-validation:
+  tests:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Install HTML Validator
-        run: npm install -g html-validator-cli
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.18
 
-      - name: Validate HTML
-        run: html-validator '**/*.html'
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm test
